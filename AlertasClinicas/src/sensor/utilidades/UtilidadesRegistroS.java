@@ -7,6 +7,10 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+/**
+ *
+ * @authors Alejandro Muñoz - Cristian Collazos
+ */
 public class UtilidadesRegistroS {
 
     public static void arrancarNS(int numPuertoRMI) throws RemoteException {
@@ -23,7 +27,6 @@ public class UtilidadesRegistroS {
             Registry registro = LocateRegistry.createRegistry(numPuertoRMI);
             System.out.println("El registro se ha creado en el puerto: " + numPuertoRMI);
         }
-
     }
 
     public static void RegistrarObjetoRemoto(Remote objetoRemoto, String dirIP, int numPuerto, String nombreObjeto) {
@@ -39,7 +42,5 @@ public class UtilidadesRegistroS {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
-
 }

@@ -3,6 +3,10 @@ package cliente.utilidades;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+/**
+ *
+ * @authors Alejandro Muñoz - Cristian Collazos
+ */
 public class UtilidadesConsola {
 
     public static int leerEntero() {
@@ -21,9 +25,7 @@ public class UtilidadesConsola {
                 valido = false;
             }
         } while (!valido);
-
         return opcion;
-
     }
 
     public static String leerCadena() {
@@ -42,7 +44,5 @@ public class UtilidadesConsola {
         } while (!valido);
 
         return linea;
-
     }
-
 }

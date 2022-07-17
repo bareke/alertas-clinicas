@@ -5,26 +5,21 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+
 /**
  *
- * @author Alejandro Muñoz -
+ * @authors Alejandro Muñoz - Cristian Collazos
  */
-public class UtilidadesRegistroC
-{
+public class UtilidadesRegistroC {
 
-    public static Remote obtenerObjRemoto(String dirIP,int puerto, String nameObjReg)
-    {
+    public static Remote obtenerObjRemoto(String dirIP, int puerto, String nameObjReg) {
         String URLRegistro;
-        URLRegistro  = "rmi://" + dirIP + ":" + puerto + "/"+nameObjReg;
-        try
-        {
+        URLRegistro = "rmi://" + dirIP + ":" + puerto + "/" + nameObjReg;
+        try {
             return Naming.lookup(URLRegistro);
-        }
-        catch (NotBoundException | MalformedURLException | RemoteException e)
-        {
-            System.out.println("Excepcion en obtencion del objeto remoto"+ e);
+        } catch (NotBoundException | MalformedURLException | RemoteException e) {
+            System.out.println("Excepcion en obtencion del objeto remoto" + e);
             return null;
         }
     }
-
 }

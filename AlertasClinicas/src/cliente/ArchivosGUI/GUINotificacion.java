@@ -6,7 +6,7 @@ import sensor.dto.Sensor;
 
 /**
  *
- * @author Alejandro Muñoz -
+ * @authors Alejandro Muñoz - Cristian Collazos
  */
 public class GUINotificacion extends javax.swing.JFrame implements NotificacionClienteInt{
 
@@ -105,13 +105,11 @@ public class GUINotificacion extends javax.swing.JFrame implements NotificacionC
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        n1.getAccessibleContext().setAccessibleName("");
-
         panelTexto2.setBackground(new java.awt.Color(153, 153, 153));
 
         jLabel2.setBackground(new java.awt.Color(255, 51, 51));
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel2.setText("Desarrollado por: Alejandro Muñoz -");
+        jLabel2.setText("Desarrollado por: Alejandro Muñoz - Cristian Collazos");
 
         javax.swing.GroupLayout panelTexto2Layout = new javax.swing.GroupLayout(panelTexto2);
         panelTexto2.setLayout(panelTexto2Layout);

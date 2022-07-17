@@ -1,25 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servidor.dto;
 
 import java.io.Serializable;
 
 /**
  *
- * @author Alejandro Muñoz -
+ * @authors Alejandro Muñoz - Cristian Collazos
  */
-public class IndicadoresDTO implements Serializable{
+public class IndicadoresDTO implements Serializable {
+
     private int FrecuenciaCardiaca;
     private int PresionSistolica;
     private int PresionDiastolica;
     private int FrecuenciaRespiratoria;
     private float Temperatura;
     private int Oxigeno;
-    
-    public IndicadoresDTO(){}
+
+    public IndicadoresDTO() {
+    }
 
     public IndicadoresDTO(int FrecuenciaCardiaca, int PresionSistolica, int PresionDiastolica, int FrecuenciaRespiratoria, float Temperatura, int Oxigeno) {
         this.FrecuenciaCardiaca = FrecuenciaCardiaca;
@@ -77,7 +74,4 @@ public class IndicadoresDTO implements Serializable{
     public void setOxigeno(int Oxigeno) {
         this.Oxigeno = Oxigeno;
     }
-    
-    
-    
 }
