@@ -10,17 +10,17 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
-import sensor.dto.Sensor;
+import sensor.dto.SensorRepository;
 import servidor.dto.IndicadoresDTO;
 
 /**
  *
  * @authors Alejandro Muñoz - Cristian Collazos
  */
-public class GestionServidorImpl extends UnicastRemoteObject implements gestionServidorInt {
+public class GestionServidorImpl extends UnicastRemoteObject implements GestionServidorInt {
 
     //Lista de sensores
-    private ArrayList<Sensor> sensores;
+    private ArrayList<SensorRepository> sensores;
     //clientes notificaciones
     private List<NotificacionInt> clientes;
 
@@ -46,7 +46,7 @@ public class GestionServidorImpl extends UnicastRemoteObject implements gestionS
     }
 
     @Override
-    public void regSensor(Sensor objSensor) throws RemoteException {
+    public void regSensor(SensorRepository objSensor) throws RemoteException {
         System.out.println("Registrando los sensores en la habitacion #" + objSensor.getId() + "...");
         sensores.add(objSensor);
     }
@@ -54,7 +54,7 @@ public class GestionServidorImpl extends UnicastRemoteObject implements gestionS
     //Registrar indicadores
     @Override
     public void regIndicadores(int id, IndicadoresDTO objIndicador) throws RemoteException {
-        Sensor tempSensor = new Sensor();
+        SensorRepository tempSensor = new SensorRepository();
         System.out.println("enviando indicadores");
         boolean rango = true;
         for (int i = 0; i < sensores.size(); i++) {
@@ -84,11 +84,12 @@ public class GestionServidorImpl extends UnicastRemoteObject implements gestionS
         if (objIndicador.getFrecuenciaCardiaca() < 60 || objIndicador.getFrecuenciaCardiaca() > 80) {
             cant++;
         }
-        if (objIndicador.getPresionSistolica() < 110 || objIndicador.getPresionSistolica() > 140) {
-            cant++;
-        }
-        if (objIndicador.getPresionDiastolica() < 70 || objIndicador.getPresionDiastolica() > 90) {
-            cant++;
+        if (objIndicador.getPresionArterial() < 0) {
+            if (objIndicador.getPresionArterial() < 110 || objIndicador.getPresionArterial() > 140) {
+                cant++;
+            } else if (objIndicador.getPresionArterial() < 70 || objIndicador.getPresionArterial() > 90) {
+                cant++;
+            }
         }
         if (objIndicador.getFrecuenciaRespiratoria() < 12 || objIndicador.getFrecuenciaRespiratoria() > 20) {
             cant++;

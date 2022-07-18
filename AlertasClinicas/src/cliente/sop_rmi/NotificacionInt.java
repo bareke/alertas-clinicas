@@ -2,7 +2,7 @@ package cliente.sop_rmi;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import sensor.dto.Sensor;
+import sensor.dto.SensorRepository;
 
 /**
  *
@@ -10,5 +10,5 @@ import sensor.dto.Sensor;
  */
 public interface NotificacionInt extends Remote {
 
-    public void notificarCallback(Sensor objSensor) throws RemoteException;
+    public void notificarCallback(SensorRepository objSensor) throws RemoteException;
 }

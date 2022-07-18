@@ -3,8 +3,8 @@ package cliente;
 import cliente.ArchivosGUI.GUINotificacion;
 import java.rmi.RemoteException;
 import servidor.utilidades.UtilidadesRegistroC;
-import servidor.sop_rmi.gestionServidorInt;
 import cliente.sop_rmi.NotificacionImpl;
+import servidor.sop_rmi.GestionServidorInt;
 
 /**
  *
@@ -13,7 +13,7 @@ import cliente.sop_rmi.NotificacionImpl;
 public class ClienteNotificacion {
 
     public static void main(String[] args) throws RemoteException {
-        gestionServidorInt refRemota;
+        GestionServidorInt refRemota;
         int numPuertoRMIRegistry = 0;
         String direccionIpRMIRegistry = "";
         System.out.println("CLIENTE ADMINISTRADOR");
@@ -22,7 +22,7 @@ public class ClienteNotificacion {
             direccionIpRMIRegistry = "localhost";
             System.out.println("Iniciando el rmiregistry por el puerto de escucha 5000");
             numPuertoRMIRegistry = 5000;
-            refRemota = (gestionServidorInt) UtilidadesRegistroC.obtenerObjRemoto(direccionIpRMIRegistry, numPuertoRMIRegistry, "ObjetoRemotoServidor");
+            refRemota = (GestionServidorInt) UtilidadesRegistroC.obtenerObjRemoto(direccionIpRMIRegistry, numPuertoRMIRegistry, "ObjetoRemotoServidor");
 
             //Notificaciondecliente
             NotificacionClienteInt objuser = null;

@@ -1,6 +1,6 @@
 package cliente;
 
-import sensor.dto.Sensor;
+import sensor.dto.SensorRepository;
 
 /**
  *
@@ -8,5 +8,5 @@ import sensor.dto.Sensor;
  */
 public interface NotificacionClienteInt {
 
-    public void notificar(Sensor objSensor);
+    public void notificar(SensorRepository objSensor);
 }

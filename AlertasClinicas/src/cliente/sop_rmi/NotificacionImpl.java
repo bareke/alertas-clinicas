@@ -3,7 +3,7 @@ package cliente.sop_rmi;
 import cliente.NotificacionClienteInt;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import sensor.dto.Sensor;
+import sensor.dto.SensorRepository;
 
 /**
  *
@@ -20,7 +20,7 @@ public class NotificacionImpl extends UnicastRemoteObject implements Notificacio
     }
 
     @Override
-    public void notificarCallback(Sensor objSensor) throws RemoteException {
+    public void notificarCallback(SensorRepository objSensor) throws RemoteException {
         objr.notificar(objSensor);
     }
 

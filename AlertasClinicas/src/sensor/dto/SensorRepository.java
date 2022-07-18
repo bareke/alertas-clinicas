@@ -7,15 +7,15 @@ import servidor.dto.IndicadoresDTO;
  *
  * @authors Alejandro Muñoz - Cristian Collazos
  */
-public class Sensor implements Serializable {
+public class SensorRepository implements Serializable {
 
     private int id;
     private IndicadoresDTO indicadores;
 
-    public Sensor() {
+    public SensorRepository() {
     }
 
-    public Sensor(int id, IndicadoresDTO indicadores) {
+    public SensorRepository(int id, IndicadoresDTO indicadores) {
         this.id = id;
         this.indicadores = indicadores;
     }

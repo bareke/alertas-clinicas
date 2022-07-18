@@ -1,14 +1,13 @@
-
 package cliente.ArchivosGUI;
 
 import cliente.NotificacionClienteInt;
-import sensor.dto.Sensor;
+import sensor.dto.SensorRepository;
 
 /**
  *
  * @authors Alejandro Muñoz - Cristian Collazos
  */
-public class GUINotificacion extends javax.swing.JFrame implements NotificacionClienteInt{
+public class GUINotificacion extends javax.swing.JFrame implements NotificacionClienteInt {
 
     /**
      * Creates new form GUIAdministrador
@@ -204,38 +203,40 @@ public class GUINotificacion extends javax.swing.JFrame implements NotificacionC
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void notificar(Sensor objSensor) {
-          jTextArea3.setText("");
-          EvaluarSensor(objSensor);
+    public void notificar(SensorRepository objSensor) {
+        jTextArea3.setText("");
+        EvaluarSensor(objSensor);
     }
-    
-    private void EvaluarSensor(Sensor objSensor){
+
+    private void EvaluarSensor(SensorRepository objSensor) {
         int cant = 0;
-        if(objSensor.getIndicadores().getFrecuenciaCardiaca() < 60 || objSensor.getIndicadores().getFrecuenciaCardiaca() > 80){
+        if (objSensor.getIndicadores().getFrecuenciaCardiaca() < 60 || objSensor.getIndicadores().getFrecuenciaCardiaca() > 80) {
             cant++;
-            jTextArea3.append("\nFrecuencia Cardiaca: "+ objSensor.getIndicadores().getFrecuenciaCardiaca()+"\n");
+            jTextArea3.append("\nFrecuencia Cardiaca: " + objSensor.getIndicadores().getFrecuenciaCardiaca() + "\n");
         }
-        if(objSensor.getIndicadores().getPresionSistolica() < 110 || objSensor.getIndicadores().getPresionSistolica() > 140){
+
+        if (objSensor.getIndicadores().getPresionArterial() < 0) {
             cant++;
-            jTextArea3.append("\nPresion Sistolica: "+ objSensor.getIndicadores().getPresionSistolica()+"\n");
+            if (objSensor.getIndicadores().getPresionArterial() < 110 || objSensor.getIndicadores().getPresionArterial() > 140) {
+                jTextArea3.append("\nPresion Sistolica: " + objSensor.getIndicadores().getPresionArterial() + "\n");
+            } else if (objSensor.getIndicadores().getPresionArterial() < 70 || objSensor.getIndicadores().getPresionArterial() > 90) {
+                jTextArea3.append("\nPresion Diastolica: " + objSensor.getIndicadores().getPresionArterial() + "\n");
+            }
         }
-        if(objSensor.getIndicadores().getPresionDiastolica() < 70 || objSensor.getIndicadores().getPresionDiastolica() > 90){
+
+        if (objSensor.getIndicadores().getFrecuenciaRespiratoria() < 12 || objSensor.getIndicadores().getFrecuenciaRespiratoria() > 20) {
             cant++;
-            jTextArea3.append("\nPresion Diastolica: "+ objSensor.getIndicadores().getPresionDiastolica()+"\n");
+            jTextArea3.append("\nFrecuencia Respiratoria: " + objSensor.getIndicadores().getFrecuenciaRespiratoria() + "\n");
         }
-        if(objSensor.getIndicadores().getFrecuenciaRespiratoria() < 12 || objSensor.getIndicadores().getFrecuenciaRespiratoria() > 20){
+        if (objSensor.getIndicadores().getTemperatura() < 36 || objSensor.getIndicadores().getTemperatura() > 37) {
             cant++;
-            jTextArea3.append("\nFrecuencia Respiratoria: "+ objSensor.getIndicadores().getFrecuenciaRespiratoria()+"\n");
+            jTextArea3.append("\nTemperatura: " + objSensor.getIndicadores().getTemperatura() + "\n");
         }
-        if(objSensor.getIndicadores().getTemperatura() < 36 || objSensor.getIndicadores().getTemperatura() > 37){
+        if (objSensor.getIndicadores().getOxigeno() < 95 || objSensor.getIndicadores().getOxigeno() > 100) {
             cant++;
-            jTextArea3.append("\nTemperatura: "+ objSensor.getIndicadores().getTemperatura()+"\n");
+            jTextArea3.append("\nOxigeno: " + objSensor.getIndicadores().getOxigeno() + "\n");
         }
-        if(objSensor.getIndicadores().getOxigeno() < 95 || objSensor.getIndicadores().getOxigeno() > 100){
-            cant++;
-            jTextArea3.append("\nOxigeno: "+ objSensor.getIndicadores().getOxigeno()+"\n");
-        }
-        n1.setText("El paciente en la habitacion #"+objSensor.getId()+" presenta "+cant+" indicadores fuera de rango");
-        
+        n1.setText("El paciente en la habitacion #" + objSensor.getId() + " presenta " + cant + " indicadores fuera de rango");
+
     }
 }

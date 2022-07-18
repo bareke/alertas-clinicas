@@ -8,70 +8,68 @@ import java.io.Serializable;
  */
 public class IndicadoresDTO implements Serializable {
 
-    private int FrecuenciaCardiaca;
-    private int PresionSistolica;
-    private int PresionDiastolica;
-    private int FrecuenciaRespiratoria;
-    private float Temperatura;
-    private int Oxigeno;
+    //<editor-fold defaultstate="collapsed" desc="Atributos">
+    private int frecuenciaCardiaca;
+    private int presionArterial;
+    private int frecuenciaRespiratoria;
+    private float temperatura;
+    private int oxigeno;
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Constructores">
     public IndicadoresDTO() {
     }
 
-    public IndicadoresDTO(int FrecuenciaCardiaca, int PresionSistolica, int PresionDiastolica, int FrecuenciaRespiratoria, float Temperatura, int Oxigeno) {
-        this.FrecuenciaCardiaca = FrecuenciaCardiaca;
-        this.PresionSistolica = PresionSistolica;
-        this.PresionDiastolica = PresionDiastolica;
-        this.FrecuenciaRespiratoria = FrecuenciaRespiratoria;
-        this.Temperatura = Temperatura;
-        this.Oxigeno = Oxigeno;
+    public IndicadoresDTO(int frecuenciaCardiaca, int presionSistolica, int presionDiastolica, int frecuenciaRespiratoria, float temperatura, int oxigeno) {
+        this.frecuenciaCardiaca = frecuenciaCardiaca;
+        this.presionArterial = presionSistolica;
+        this.frecuenciaRespiratoria = frecuenciaRespiratoria;
+        this.temperatura = temperatura;
+        this.oxigeno = oxigeno;
     }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Getters">
     public int getFrecuenciaCardiaca() {
-        return FrecuenciaCardiaca;
+        return frecuenciaCardiaca;
     }
 
-    public void setFrecuenciaCardiaca(int FrecuenciaCardiaca) {
-        this.FrecuenciaCardiaca = FrecuenciaCardiaca;
-    }
-
-    public int getPresionSistolica() {
-        return PresionSistolica;
-    }
-
-    public void setPresionSistolica(int PresionSistolica) {
-        this.PresionSistolica = PresionSistolica;
-    }
-
-    public int getPresionDiastolica() {
-        return PresionDiastolica;
-    }
-
-    public void setPresionDiastolica(int PresionDiastolica) {
-        this.PresionDiastolica = PresionDiastolica;
+    public int getPresionArterial() {
+        return presionArterial;
     }
 
     public int getFrecuenciaRespiratoria() {
-        return FrecuenciaRespiratoria;
-    }
-
-    public void setFrecuenciaRespiratoria(int FrecuenciaRespiratoria) {
-        this.FrecuenciaRespiratoria = FrecuenciaRespiratoria;
+        return frecuenciaRespiratoria;
     }
 
     public float getTemperatura() {
-        return Temperatura;
-    }
-
-    public void setTemperatura(float Temperatura) {
-        this.Temperatura = Temperatura;
+        return temperatura;
     }
 
     public int getOxigeno() {
-        return Oxigeno;
+        return oxigeno;
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Setters">
+    public void setFrecuenciaCardiaca(int frecuenciaCardiaca) {
+        this.frecuenciaCardiaca = frecuenciaCardiaca;
     }
 
-    public void setOxigeno(int Oxigeno) {
-        this.Oxigeno = Oxigeno;
+    public void setPresionArterial(int presionArterial) {
+        this.presionArterial = presionArterial;
     }
+
+    public void setFrecuenciaRespiratoria(int frecuenciaRespiratoria) {
+        this.frecuenciaRespiratoria = frecuenciaRespiratoria;
+    }
+
+    public void setTemperatura(float temperatura) {
+        this.temperatura = temperatura;
+    }
+
+    public void setOxigeno(int oxigeno) {
+        this.oxigeno = oxigeno;
+    }
+    //</editor-fold>
 }
