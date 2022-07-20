@@ -40,6 +40,9 @@ public class GestorDeHilo extends Thread {
     }
 
     public void imprimirErrores() {
+        System.out.println("");
+        System.out.println("Lista de errores");
+
         for (String error : this.errores) {
             System.out.println(error);
         }
