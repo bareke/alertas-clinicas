@@ -16,6 +16,7 @@ Parcial 2 de la materia Sistemas Distribuidos
 ## Pasos para ejecutar la aplicación
 
 1. Se recomienda utilizar **Java 17** o superior
+2. Ejecutar el archivo **logs/ServidorLogs.java**
 2. Ejecutar el archivo **servidor/servidorDeObjetos.java**
 3. Ejecutar el archivo **sensor/ClienteSensores.java**
 4. Ejecutar el archivo **cliente/ClienteNotificacion.java**
