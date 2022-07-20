@@ -1,17 +1,16 @@
 package servidor.sop_rmi;
 
 import cliente.sop_rmi.NotificacionInt;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import sensor.dto.SensorRepository;
 import servidor.dto.IndicadoresDTO;
+import servidor.ConexionServidorLogs;
 
 /**
  *
@@ -23,6 +22,7 @@ public class GestionServidorImpl extends UnicastRemoteObject implements GestionS
     private ArrayList<SensorRepository> sensores;
     //clientes notificaciones
     private List<NotificacionInt> clientes;
+    private ConexionServidorLogs conexionServidorLogs;
 
     public GestionServidorImpl() throws RemoteException, IOException {
         super();
@@ -30,6 +30,8 @@ public class GestionServidorImpl extends UnicastRemoteObject implements GestionS
         sensores = new ArrayList<>();
         //clientes notificaciones
         clientes = new ArrayList<>();
+        this.conexionServidorLogs = new ConexionServidorLogs();
+        this.conexionServidorLogs.conectarseServidor();
     }
 
     //Consultar si existe sensor
@@ -54,42 +56,90 @@ public class GestionServidorImpl extends UnicastRemoteObject implements GestionS
     //Registrar indicadores
     @Override
     public void regIndicadores(int id, IndicadoresDTO objIndicador) throws RemoteException {
-        SensorRepository tempSensor = new SensorRepository();
-        System.out.println("enviando indicadores");
-        boolean rango = true;
-        for (int i = 0; i < sensores.size(); i++) {
-            if (sensores.get(i).getId() == id) {
-                sensores.get(i).setIndicadores(objIndicador);
-                tempSensor = sensores.get(i);
-            }
-        }
-        rango = evaluarIndicadores(objIndicador);
-        if (rango == false) {
-            System.out.println("notificando el callback a los clientes notificaciones");
-            System.out.println("Alerta en la habitación #" + id);
-
-            try {
-                //cambiar administrador por cliente notificaciones
-                for (int j = 0; j < clientes.size(); j++) {
-                    clientes.get(j).notificarCallback(tempSensor);
+        try {
+            SensorRepository tempSensor = new SensorRepository();
+            System.out.println("enviando indicadores");
+            int rango = 0;
+            String error;
+            for (int i = 0; i < sensores.size(); i++) {
+                if (sensores.get(i).getId() == id) {
+                    tempSensor.setId(id);
+                    tempSensor.setIndicadores(objIndicador);
                 }
-            } catch (Exception err) {
-                err.getStackTrace();
             }
+            rango = evaluarIndicadores(objIndicador);
+
+            switch (rango) {
+
+                case -4:
+                    error = "Valor incorrecto en el Oxigeno con valor=" + objIndicador.getOxigeno() + " en la habitación=" + id;
+                    System.out.println(error);
+                    this.conexionServidorLogs.enviarInformacion(error);
+                    break;
+                case -3:
+                    error = "Valor incorrecto en la temperatura con valor: " + objIndicador.getTemperatura() + " en la habitación " + id;
+                    System.out.println(error);
+                    this.conexionServidorLogs.enviarInformacion(error);
+                    break;
+                case -2:
+                    error = "Valor incorrecto en la Frecuencia Respiratoria con valor: " + objIndicador.getFrecuenciaRespiratoria() + " en la habitación " + id;
+                    System.out.println(error);
+                    this.conexionServidorLogs.enviarInformacion(error);
+                    break;
+                case -1:
+                    error = "Valor incorrecto en la presion Arterial con valor: " + objIndicador.getPresionArterial() + " en la habitación " + id;
+                    System.out.println(error);
+                    this.conexionServidorLogs.enviarInformacion(error);
+                    break;
+                case 0:
+                    error = "Valor incorrecto en la Frecuencia Cardiaca con valor: " + objIndicador.getFrecuenciaCardiaca() + " en la habitación " + id;
+                    System.out.println(error);
+                    this.conexionServidorLogs.enviarInformacion(error);
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    System.out.println("notificando el callback a los clientes notificaciones");
+                    System.out.println("Alerta en la habitación #" + id);
+                    try {
+                        for (int j = 0; j < clientes.size(); j++) {
+                            clientes.get(j).notificarCallback(tempSensor);
+                        }
+                    } catch (Exception err) {
+                        err.getStackTrace();
+                    }
+                    break;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(GestionServidorImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private boolean evaluarIndicadores(IndicadoresDTO objIndicador) {
+    private int evaluarIndicadores(IndicadoresDTO objIndicador) {
         int cant = 0;
+        if (objIndicador.getFrecuenciaCardiaca() <= 0) {
+            return 0;
+        }
+        if (objIndicador.getPresionArterial() <= 0) {
+            return -1;
+        }
+        if (objIndicador.getFrecuenciaRespiratoria() <= 0) {
+            return -2;
+        }
+        if (objIndicador.getTemperatura() <= 0) {
+            return -3;
+        }
+        if (objIndicador.getOxigeno() <= 0) {
+            return -4;
+        }
+
         if (objIndicador.getFrecuenciaCardiaca() < 60 || objIndicador.getFrecuenciaCardiaca() > 80) {
             cant++;
         }
-        if (objIndicador.getPresionArterial() < 0) {
-            if (objIndicador.getPresionArterial() < 110 || objIndicador.getPresionArterial() > 140) {
-                cant++;
-            } else if (objIndicador.getPresionArterial() < 70 || objIndicador.getPresionArterial() > 90) {
-                cant++;
-            }
+        if (objIndicador.getPresionArterial() < 110 || objIndicador.getPresionArterial() > 140) {
+            cant++;
+        } else if (objIndicador.getPresionArterial() < 70 || objIndicador.getPresionArterial() > 90) {
+            cant++;
         }
         if (objIndicador.getFrecuenciaRespiratoria() < 12 || objIndicador.getFrecuenciaRespiratoria() > 20) {
             cant++;
@@ -101,9 +151,9 @@ public class GestionServidorImpl extends UnicastRemoteObject implements GestionS
             cant++;
         }
         if (cant >= 2) {
-            return false;
+            return 2;
         }
-        return true;
+        return 1;
     }
 
     @Override

@@ -20,8 +20,8 @@ public class ClienteNotificacion {
         try {
             System.out.println("Iniciando el rmiregistry en la dirección ip 'localhost'");
             direccionIpRMIRegistry = "localhost";
-            System.out.println("Iniciando el rmiregistry por el puerto de escucha 5000");
-            numPuertoRMIRegistry = 5000;
+            System.out.println("Iniciando el rmiregistry por el puerto de escucha 6000");
+            numPuertoRMIRegistry = 6000;
             refRemota = (GestionServidorInt) UtilidadesRegistroC.obtenerObjRemoto(direccionIpRMIRegistry, numPuertoRMIRegistry, "ObjetoRemotoServidor");
 
             //Notificaciondecliente

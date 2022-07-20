@@ -11,9 +11,6 @@ import servidor.utilidades.UtilidadesRegistroS;
  */
 public class servidorDeObjetos {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) throws RemoteException, IOException {
 
         GestionServidorImpl refRemota = new GestionServidorImpl();
@@ -22,8 +19,8 @@ public class servidorDeObjetos {
 
         System.out.println("Iniciando el rmiregistry en la dirección ip 'localhost'");
         direccionIpRMIRegistry = "localhost";
-        System.out.println("iniciando el rmiregistry por el puerto de escucha 5000");
-        numPuertoRMIRegistry = 5000;
+        System.out.println("iniciando el rmiregistry por el puerto de escucha 6000");
+        numPuertoRMIRegistry = 6000;
 
         UtilidadesRegistroS.arrancarNS(numPuertoRMIRegistry);
         UtilidadesRegistroS.RegistrarObjetoRemoto(refRemota, direccionIpRMIRegistry, numPuertoRMIRegistry, "ObjetoRemotoServidor");

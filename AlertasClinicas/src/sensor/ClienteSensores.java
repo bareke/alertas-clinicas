@@ -2,11 +2,6 @@ package sensor;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import sensor.dto.SensorRepository;
 import static sensor.utilidades.UtilidadesConsola.leerEntero;
 import servidor.sop_rmi.GestionServidorImpl;
@@ -33,8 +28,8 @@ public class ClienteSensores {
 
             System.out.println("Iniciando el rmiregistry en la dirección ip 'localhost'");
             direccionIpRMIRegistry = "localhost";
-            System.out.println("Iniciando el rmiregistry por el puerto de escucha 5000");
-            numPuertoRMIRegistry = 5000;
+            System.out.println("Iniciando el rmiregistry por el puerto de escucha 6000");
+            numPuertoRMIRegistry = 6000;
 
             refRemote = new GestionServidorImpl();
             UtilidadesRegistroS.arrancarNS(numPuertoRMIRegistry);
@@ -58,8 +53,7 @@ public class ClienteSensores {
             objSensor.setId(id);
             refRemote.regSensor(objSensor);
 
-            //Tarea repetida: registrar indicadores cada 30 seg en el sensor
-            System.out.println("Leyendo indicadores de la habitación #" + id + " (30 seg)");
+            System.out.println("Leyendo indicadores de la habitación #" + id);
             leerIndicadores();
 
         } catch (Exception err) {
