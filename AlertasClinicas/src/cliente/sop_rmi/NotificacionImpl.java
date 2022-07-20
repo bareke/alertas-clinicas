@@ -23,5 +23,4 @@ public class NotificacionImpl extends UnicastRemoteObject implements Notificacio
     public void notificarCallback(SensorRepository objSensor) throws RemoteException {
         objr.notificar(objSensor);
     }
-
 }

@@ -12,6 +12,8 @@ import servidor.utilidades.UtilidadesRegistroS;
 public class servidorDeObjetos {
 
     public static void main(String[] args) throws RemoteException, IOException {
+        System.out.println("SERVIDOR ALERTAS");
+        System.out.println("");
 
         GestionServidorImpl refRemota = new GestionServidorImpl();
         int numPuertoRMIRegistry = 0;

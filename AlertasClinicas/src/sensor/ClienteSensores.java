@@ -21,9 +21,12 @@ public class ClienteSensores {
     public static GestionServidorInt refRemote;
 
     public static void main(String[] args) throws RemoteException, IOException {
+        System.out.println("CLIENTE SENSOR");
+        System.out.println("");
+
         int numPuertoRMIRegistry = 0;
         String direccionIpRMIRegistry = "";
-        System.out.println("SENSORES");
+
         try {
 
             System.out.println("Iniciando el rmiregistry en la dirección ip 'localhost'");
@@ -39,7 +42,7 @@ public class ClienteSensores {
             SensorRepository objSensor = new SensorRepository();
 
             do {
-                System.out.println("Ingrese el numero de habitación de los sensores");
+                System.out.print("Numero de habitación de los sensores, ");
                 id = sensor.utilidades.UtilidadesConsola.leerEntero();
                 resultado = refRemote.existeSensor(id);
 
@@ -53,8 +56,16 @@ public class ClienteSensores {
             objSensor.setId(id);
             refRemote.regSensor(objSensor);
 
+            System.out.println("");
             System.out.println("Leyendo indicadores de la habitación #" + id);
-            leerIndicadores();
+
+            int opcion;
+            do {
+                leerIndicadores();
+
+                System.out.println("Presione 1 para ingresar más valores al sensor");
+                opcion = sensor.utilidades.UtilidadesConsola.leerEntero();
+            } while (opcion == 1);
 
         } catch (Exception err) {
             err.getStackTrace();
@@ -63,26 +74,20 @@ public class ClienteSensores {
     }
 
     public static void leerIndicadores() throws RemoteException {
-        System.out.println("Dato para Frecuencia cardiaca");
+        System.out.print("Frecuencia cardiaca, ");
         objIndicadores.setFrecuenciaCardiaca(leerEntero());
 
-        System.out.println("Dato para Presion Arterial");
+        System.out.print("Presion Arterial, ");
         objIndicadores.setPresionArterial(leerEntero());
 
-        System.out.println("Dato para Frecuencia Respiratoria");
+        System.out.print("Frecuencia Respiratoria, ");
         objIndicadores.setFrecuenciaRespiratoria(leerEntero());
 
-        System.out.println("Dato para Temperatura");
+        System.out.print("Temperatura, ");
         objIndicadores.setTemperatura(leerEntero());
 
-        System.out.println("Dato para Oxigeno");
+        System.out.print("Oxigeno, ");
         objIndicadores.setOxigeno(leerEntero());
-
-        System.out.println("Frecuencia cardiaca: " + objIndicadores.getFrecuenciaCardiaca());
-        System.out.println("Presion Sistolica: " + objIndicadores.getPresionArterial());
-        System.out.println("Frecuencia Respiratoria: " + objIndicadores.getFrecuenciaRespiratoria());
-        System.out.println("Temperatura: " + objIndicadores.getTemperatura());
-        System.out.println("Oxigeno: " + objIndicadores.getOxigeno());
 
         refRemote.regIndicadores(id, objIndicadores);
     }

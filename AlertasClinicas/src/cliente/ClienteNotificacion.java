@@ -13,10 +13,13 @@ import servidor.sop_rmi.GestionServidorInt;
 public class ClienteNotificacion {
 
     public static void main(String[] args) throws RemoteException {
+        System.out.println("CLIENTE NOTIFICACION");
+        System.out.println("");
+
         GestionServidorInt refRemota;
         int numPuertoRMIRegistry = 0;
         String direccionIpRMIRegistry = "";
-        System.out.println("CLIENTE ADMINISTRADOR");
+
         try {
             System.out.println("Iniciando el rmiregistry en la dirección ip 'localhost'");
             direccionIpRMIRegistry = "localhost";

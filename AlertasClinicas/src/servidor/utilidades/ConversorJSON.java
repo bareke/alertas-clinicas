@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package servidor.utilidades;
 
 import com.google.gson.Gson;
@@ -18,7 +14,6 @@ public class ConversorJSON {
         String log = gson.fromJson(msg, msg.getClass());
         System.out.println("log recibido: " + log);
         return log;
-
     }
 
     public static String convertirJson(String err) {
@@ -27,7 +22,5 @@ public class ConversorJSON {
         String JSON = gson.toJson(err);
         System.out.println("log enviado: " + JSON);
         return JSON;
-
     }
-
 }

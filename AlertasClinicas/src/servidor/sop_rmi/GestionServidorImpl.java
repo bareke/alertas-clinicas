@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import sensor.dto.SensorRepository;
 import servidor.dto.IndicadoresDTO;
 import servidor.ConexionServidorLogs;
+import java.time.LocalDate;
 
 /**
  *
@@ -69,30 +70,32 @@ public class GestionServidorImpl extends UnicastRemoteObject implements GestionS
             }
             rango = evaluarIndicadores(objIndicador);
 
+            LocalDate fecha = LocalDate.now();
+
             switch (rango) {
 
                 case -4:
-                    error = "Valor incorrecto en el Oxigeno con valor=" + objIndicador.getOxigeno() + " en la habitación=" + id;
+                    error = "Valor incorrecto en el oxigeno con valor=" + objIndicador.getOxigeno() + " con fecha=" + fecha + " en la habitación=" + id;
                     System.out.println(error);
                     this.conexionServidorLogs.enviarInformacion(error);
                     break;
                 case -3:
-                    error = "Valor incorrecto en la temperatura con valor: " + objIndicador.getTemperatura() + " en la habitación " + id;
+                    error = "Valor incorrecto en la temperatura con valor=" + objIndicador.getTemperatura() + " con fecha=" + fecha + " en la habitación=" + id;
                     System.out.println(error);
                     this.conexionServidorLogs.enviarInformacion(error);
                     break;
                 case -2:
-                    error = "Valor incorrecto en la Frecuencia Respiratoria con valor: " + objIndicador.getFrecuenciaRespiratoria() + " en la habitación " + id;
+                    error = "Valor incorrecto en la frecuencia respiratoria con valor=" + objIndicador.getFrecuenciaRespiratoria() + " con fecha=" + fecha + " en la habitación=" + id;
                     System.out.println(error);
                     this.conexionServidorLogs.enviarInformacion(error);
                     break;
                 case -1:
-                    error = "Valor incorrecto en la presion Arterial con valor: " + objIndicador.getPresionArterial() + " en la habitación " + id;
+                    error = "Valor incorrecto en la presion arterial con valor=" + objIndicador.getPresionArterial() + " con fecha=" + fecha + " en la habitación=" + id;
                     System.out.println(error);
                     this.conexionServidorLogs.enviarInformacion(error);
                     break;
                 case 0:
-                    error = "Valor incorrecto en la Frecuencia Cardiaca con valor: " + objIndicador.getFrecuenciaCardiaca() + " en la habitación " + id;
+                    error = "Valor incorrecto en la frecuencia cardiaca con valor=" + objIndicador.getFrecuenciaCardiaca() + " con fecha=" + fecha + " en la habitación=" + id;
                     System.out.println(error);
                     this.conexionServidorLogs.enviarInformacion(error);
                     break;

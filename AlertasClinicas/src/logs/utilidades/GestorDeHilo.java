@@ -5,10 +5,13 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GestorDeHilo extends Thread {
 
     private Socket objSocketCliente;
+    private List<String> errores = new ArrayList<>();
 
     public GestorDeHilo(Socket objSocket) {
         this.objSocketCliente = objSocket;
@@ -26,11 +29,19 @@ public class GestorDeHilo extends Thread {
             flujoSalida = new DataOutputStream(objSocketCliente.getOutputStream());
             message = flujoEntrada.readUTF();//se bloquea el servidor
             String error = ConversorJSON.obtenerLectura(message);
-            System.out.println(error);
+
+            errores.add(error);
+            imprimirErrores();
 
             objSocketCliente.close();
         } catch (IOException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    public void imprimirErrores() {
+        for (String error : this.errores) {
+            System.out.println(error);
         }
     }
 }

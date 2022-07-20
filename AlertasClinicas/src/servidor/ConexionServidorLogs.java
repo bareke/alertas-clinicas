@@ -19,7 +19,6 @@ public class ConexionServidorLogs {
     public void conectarseServidor() {
         try {
             this.socket = new Socket("127.0.0.1", 5000);
-            //192.168.56.1
             this.flujoEntrada = new DataInputStream(socket.getInputStream());
             this.flujoSalida = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {

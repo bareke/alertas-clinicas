@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package logs.utilidades;
 
 import java.io.IOException;
@@ -10,7 +6,7 @@ import java.net.Socket;
 
 /**
  *
- * @author
+ * @authors Alejandro Muñoz - Cristian Collazos
  */
 public class ServidorConcurrente {
 
@@ -72,5 +68,4 @@ public class ServidorConcurrente {
     public void setObjSocket(Socket objSocket) {
         this.objSocket = objSocket;
     }
-
 }

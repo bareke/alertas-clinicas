@@ -9,9 +9,10 @@ import logs.utilidades.ServidorConcurrente;
 public class ServidorLogs {
 
     public static void main(String[] args) {
+        System.out.println("SERVIDOR LOGS");
+        System.out.println("");
 
-        System.out.println("Servidor de Logs");
-        System.out.println("\nIniciando servidor en el puerto 5000: ");
+        System.out.println("Iniciando servidor en el puerto 5000: ");
 
         ServidorConcurrente servidorLogs = new ServidorConcurrente();
         servidorLogs.inicializarServidor(5000);
